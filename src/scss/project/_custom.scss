@@ -1,0 +1,138 @@
+.primary-nav {
+  @extend .font-serif;
+}
+
+.section-title {
+  .title {
+    @extend .font-serif;
+  }
+
+  .subtitle {
+    color: #555;
+  }
+}
+
+.page-header {
+  h1 {
+    @extend .font-serif;
+
+    font-size: 2.4rem;
+    font-weight: normal;
+    letter-spacing: .15em;
+
+    @media (min-width: 768px) {
+      font-size: 3.2rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 3.6rem;
+    }
+  }
+}
+
+.wpb_revslider_element {
+  @extend .font-serif;
+}
+
+.top-sellers {
+  .title {
+    @extend .font-serif;
+
+    font-weight: 500;
+  }
+}
+
+.supro-off-canvas-panel.menu-sidebar {
+  ul {
+    &.menu {
+      li {
+        a {
+          font-weight: 400;
+        }
+      }
+    }
+
+    &.sub-menu {
+      display: block;
+    }
+  }
+}
+
+h2 {
+  font-weight: 400;
+}
+
+.supro-banner-grid {
+  .title {
+    @extend .font-serif;
+
+    font-weight: 500;
+  }
+
+  .subtitle {
+    color: #333;
+  }
+}
+
+.supro-products {
+  h3 {
+    font-weight: 400;
+  }
+
+  .subtitle {
+    letter-spacing: .02em;
+  }
+
+  .nav-filter {
+    font-size: 2rem;
+  }
+}
+
+.nav a {
+  font-size: 2rem;
+}
+
+.un-mini-cart-content {
+  line-height: 1.7;
+}
+
+.supro-off-canvas-panel {
+  .widget {
+    .widget-title {
+      font-size: 1.4rem;
+    }
+
+    .widget_nav_menu {
+      .menu {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  &.menu-sidebar ul.menu {
+    > li {
+      padding: 0;
+
+      > a {
+        @extend %hover-effect;
+
+        color: #333;
+        padding: 1.6em 1.5em;
+        font-size: 1.3rem;
+
+        &::before {
+          position: absolute;
+          top: 47%;
+          left: .2em;
+          display: block;
+          width: .4em;
+          height: .4em;
+          border-top: 1px solid #333;
+          border-left: 1px solid #333;
+          content: "";
+          transform: rotate(135deg);
+        }
+      }
+    }
+  }
+}

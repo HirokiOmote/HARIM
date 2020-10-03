@@ -1,0 +1,15 @@
+.c-section {
+  &:not(:first-of-type) {
+    margin: 60px 0;
+  }
+
+  h2 {
+    @media (min-width: 1024px) {
+      text-indent: -1.5em;
+    }
+  }
+}
+
+.c-section__inner {
+  margin: 50px 0;
+}

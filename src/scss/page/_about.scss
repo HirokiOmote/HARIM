@@ -1,0 +1,55 @@
+.p-wrapper {
+
+}
+
+.p-section-about {
+  margin-bottom: 40px;
+  padding: 0 3vw;
+
+  @media (min-width: 768px) {
+    margin-bottom: 80px;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 0 15px;
+  }
+
+  h2 {
+    @extend .font-serif;
+
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  p {
+    @extend .font-serif;
+
+    font-size: 1.4rem;
+    line-height: 2;
+    letter-spacing: .07em;
+    margin: 1em 0;
+
+    @media (min-width: 768px) {
+      font-size: 1.6rem;
+      text-align: center;
+    }
+
+    &.txt-big {
+      font-size: 1.6rem;
+
+      @media (min-width: 768px) {
+        font-size: 2.4rem;
+      }
+    }
+
+    &.txt-sub {
+      font-size: 1.2rem;
+      margin: -1.8em 0 3em;
+
+      @media (min-width: 768px) {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+    }
+  }
+}

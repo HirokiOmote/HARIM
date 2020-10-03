@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+  wordpress:
+    build: ./wordpress
+    container_name: "harim_wordpress"
+    ports:
+      - "9000:80"
+    depends_on:
+      - mariadb
+    environment:
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_HOST: "mariadb:3306"
+    # env_file: .env
+    volumes:
+      - ./public:/var/www/html
+  mariadb:
+    image: mariadb:latest
+    container_name: "harim_db"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    # env_file: .env
+    volumes:
+      - db-data:/var/lib/mysql
+      # - ./install_wordpress.sql:/docker-entrypoint-initdb.d/install_wordpress.sql
+volumes:
+  db-data:
+    driver: local

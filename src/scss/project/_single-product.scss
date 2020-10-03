@@ -1,0 +1,13 @@
+.entry-title {
+  @extend .font-serif;
+
+  font-weight: 500;
+}
+
+.supro-single-product-detail {
+  .product-summary {
+    .sku_wrapper {
+      color: #000;
+    }
+  }
+}

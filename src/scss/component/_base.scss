@@ -1,0 +1,187 @@
+.c-txt-note {
+  font-size: .8em;
+}
+
+.c-arrow-list {
+  padding-left: 1em;
+  list-style: none;
+
+  li {
+    padding: .5em 0;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    text-decoration: underline;
+    font-size: 1.4rem;
+
+    &::before {
+      position: absolute;
+      top: .5em;
+      left: -1em;
+      display: block;
+      width: .3em;
+      height: .3em;
+      border-top: 1px solid #333;
+      border-left: 1px solid #333;
+      content: "";
+      transform: rotate(135deg);
+    }
+  }
+}
+
+.c-list-normal {
+  padding: 1em;
+  list-style: none;
+
+  li {
+    text-indent: -1em;
+
+    &::before {
+      content: "・";
+    }
+  }
+}
+
+.c-list-num {
+  padding-left: 1em;
+}
+
+.c-title-main {
+  margin-bottom: 2em;
+  letter-spacing: .05em;
+  font-weight: 400;
+  font-size: 2.1rem;
+
+  @media (min-width: 768px) {
+    font-size: 2.7rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2.9rem;
+  }
+}
+
+.c-title-002 {
+  margin: 0 0 2em;
+  font-size: 1.7rem;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 2em;
+  }
+}
+
+.c-shop-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+
+  @media (min-width: 768px) {
+    margin: 0 -15px;
+  }
+
+  li {
+    padding: 15px 0;
+
+    @media (min-width: 768px) {
+      padding: 30px 15px;
+      width: 50%;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 30px 15px;
+      width: 33.33333%;
+      height: 70px;
+    }
+  }
+
+  &--full {
+    @extend .c-shop-list;
+
+    li {
+      width: 100%;
+      padding: 15px 0;
+
+      @media (min-width: 1024px) {
+        width: 100%;
+      }
+    }
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 25px;
+    font-weight: bold;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  dt {
+    font-size: 1.6rem;
+  }
+
+  dd {
+    font-size: 1.4rem;
+    font-weight: normal;
+  }
+}
+
+.c-table-common {
+  tr,
+  th,
+  td {
+    border-width: 0;
+  }
+
+  tr {
+    display: block;
+    padding: 22px 5px;
+    border-bottom: 1px solid #ddd;
+
+    @media (min-width: 1024px) {
+      display: table-row;
+    }
+  }
+
+  th,
+  td {
+    display: block;
+
+    @media (min-width: 1024px) {
+      display: table-cell;
+      padding: 30px 0;
+    }
+  }
+
+  th {
+    vertical-align: top;
+    font-size: 1.2rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.4rem;
+    }
+
+    @media (min-width: 1024px) {
+      width: 20%;
+    }
+  }
+
+  td {
+    font-size: 1.4rem;
+
+    @media (min-width: 1024px) {
+      width: 70%;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+@import
+  "mixin/mixin",
+  "foundation/common",
+  "component/base",
+	"component/header",
+	"component/section",
+	"project/custom";
+
+.menu-extra {
+  .menu-item-search,
+  .menu-item-account,
+  .menu-item-cart {
+    display: none !important;
+  }
+}
+
+.page-template-shopping-guide {
+  @import "page/guide";
+}
+
+.page-template-about {
+  @import "page/about";
+}
+
+.page-template-shoplist {
+  @import "page/shoplist";
+}
+
+.page-template-terms {
+  @import "page/terms";
+}
+
+.woocommerce {
+  @import "project/list-product";
+}
+
+.single-product {
+  @import "project/single-product";
+}

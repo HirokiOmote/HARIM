@@ -1,0 +1,9 @@
+.p-shoplist {
+  padding: 0 15px;
+}
+
+.p-section-shoplist {
+  &:not(:first-of-type) {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+
+.font-serif {
+  font-family: 'Crimson Text', Georgia, "游明朝体", "YuMincho", "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN W3", HiraMinProN-W3, "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+}
+
+%hover-effect {
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: .3;
+  }
+}
