@@ -150,6 +150,14 @@ get_header();
     <h2>中部</h2>
     <ul class="c-shop-list">
       <li>
+        <a href="http://www.charcoalgreen.com/" target="_blank">
+          <dl>
+            <dt>CHARCOAL*GREEN Nagoya</dt>
+            <dd>愛知県名古屋市中区栄3-29-1 名古屋PARCO西館5F</dd>
+          </dl>
+        </a>
+      </li>
+      <li>
         <a href="https://www.under-field.com/" target="_blank">
           <dl>
             <dt>UNDER FIELD</dt>
