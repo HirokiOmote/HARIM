@@ -57,7 +57,7 @@ function template(page, content) {
     <div class="footer-links">
       <div><h2>PAGE</h2><nav aria-label="ページ">${navLink('about', 'ABOUT')}${navLink('stocklist', 'STOCK LIST')}</nav></div>
       <div><h2>SNS</h2><nav aria-label="SNS"><a href="https://www.facebook.com/harim.info/">Facebook</a><a href="https://twitter.com/HARIMSILVER">Twitter</a><a href="https://www.instagram.com/harim_jewelry_official/">Instagram</a></nav></div>
-      <div><h2>ONLINE SHOP</h2><nav aria-label="オンラインショップ"><a href="${shop}">オンラインショップ</a><a href="${shop}inquiry">お問い合わせ</a></nav></div>
+      <div><h2>ONLINE SHOP</h2><nav aria-label="オンラインショップ"><a href="${shop}">オンラインショップ</a></nav></div>
     </div>
     <p class="copyright">© 2018 <a href="${base}index.html">HARIM</a>. All rights reserved.</p>
   </footer>
