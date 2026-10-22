@@ -37,3 +37,11 @@ Chrome の幅 320 / 390 / 1440px で全 5 ページを確認。横はみ出し�
 検査中に MIRAH の画像ファイル名のハイフン不足と、掲載していない電話番号への description の言及を修正した。検索順位、Google の再クロール、検索結果での表示は未測定。Search Console への送信は行っていない。
 
 設計の参照先: [Google の canonical の説明](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)、[パンくずの構造化データ](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb)、[画像サイトマップ](https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps)、[Schema.org Brand](https://schema.org/Brand)。
+
+## 本番反映（2026-10-22 JST）
+
+16:53 JST、HARIM 20 ファイル・1,806,135 bytes、MIRAH 22 ファイル・4,492,923 bytes を反映した。切替前の全ファイルが事前記録と一致することを確認し、新旧双方のハッシュを照合してから公開先を切り替えた。
+
+公開 URL の 105 件を検査し、全公開ファイルの内容一致、正規 URL と旧 WordPress URL の転送、HTTP/HTTPS と www の統一、404、ディレクトリ一覧の禁止を確認した。Chrome の幅 390 / 1440px で 5 ページを再確認し、検査エラーは 0 件だった。MIRAH の CONTACT と旧問い合わせ URL は利用者指定の外部 URL へ案内する。遷移先での問い合わせ送信は行っていない。
+
+独立レビューでは未解決の指摘は 0 件。ローカル Apache 2.4.59 の転送検査は 28 件通過した。本番用配置スクリプトはダミー環境で 15 件を確認し、2 サイト目の切替失敗時の復旧、パス外への展開・リンク・重複ファイルの拒否を検査した。ローカル PHP 7.4 は依存ライブラリ不足で起動できなかったため、このダミー検査には PHP 8.5.6 を使い、本番の PHP 7.4.33 で配置とハッシュ検査が通ることを確認した。
