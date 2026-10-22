@@ -1,6 +1,6 @@
 # MIRAH 静的版
 
-`https://mirah.jp/` の WordPress サイトを、既存の画像・配色・構成・店舗情報を残して静的 HTML に移したローカル確認版。本番の切替は未実施。利用者が画面を確認してから切替を判断する。
+`https://mirah.jp/` の WordPress サイトを、既存の画像・配色・構成・店舗情報を残して静的 HTML に移した。利用者のリリース指示を受け、2026-10-22 15:50 JST に本番を切り替えた。
 
 ホームと SHOP LIST の 2 ページを生成する。SHOP LIST は公開元の 8 区分・9 店舗を収録。CONTACT は利用者指定の `https://mirah-store.com/inquiry` へ移動する。
 
@@ -59,7 +59,17 @@ node build.mjs --production
 | `/index.php` | `/` |
 | manifest に記録した旧画像 URL 12 件 | 対応する `/assets/` 内のファイル |
 
-転送は 301。画像の規則は manifest から自動生成する。本体パスへの `.htaccess` の適用は切替時の確認対象。
+転送は 301。画像の規則は manifest から自動生成する。本番の `.htaccess` による転送とクエリ除去は、切替後に公開 URL で確認した。
+
+## 本番への反映
+
+2026-10-22 15:50 JST、`dist-production/` の 22 ファイルを `www/mirah` に配置した。転送後の SHA-256 を照合してから、同じファイルシステム内のディレクトリ移動で切り替えた。
+
+旧 WordPress は `$HOME/.harim-backups/mirah-20261022T064949Z-6135cf3c` に退避した。公開領域外で、親ディレクトリの権限は `700`。旧 `index.php` と `.htaccess` の SHA-256 は切替前と一致する。DB の変更・削除は行っていない。復旧時は静的版を公開領域外へ移してから、この退避ディレクトリを `www/mirah` に戻す。
+
+公開後の確認では、ページ・素材の内容一致、CONTACT と旧画像 URL の転送、HTTP から HTTPS への転送、旧 WordPress パスの 404、assets 一覧の 403 など、HTTP 検査 54 件が通過した。HARIM の公開ファイル 20 件は切替前後で一致した。
+
+Chrome の幅 1440 / 390px で本番 2 ページの画像・フォント・内部リンク・メニュー操作を確認し、横方向のはみ出し、JavaScript エラー、表示時の外部リソース要求は検出されなかった。JavaScript 無効時も画像とリンクを確認した。本番の検証記録と画面は Git 管理外の `.impeccable/production/` に保存している。
 
 ## 検証記録
 
@@ -76,8 +86,8 @@ node build.mjs --production
 
 検証結果は [checks.json](.impeccable/review/checks.json)。画面記録は [ホーム・デスクトップ](.impeccable/review/home-desktop.png)、[ホーム・モバイル](.impeccable/review/home-mobile.png)、[SHOP LIST・デスクトップ](.impeccable/review/shoplist-desktop.png)、[SHOP LIST・モバイル](.impeccable/review/shoplist-mobile.png)。`.impeccable/` と生成先は Git 管理外。
 
-SHOP LIST の白い見出しは、元サイトと同じく明るいペンダント部分に重なる。背景の一部を採取した白文字とのコントラスト比はデスクトップで約 1.85:1、モバイルで約 1.73:1。検出器は背景を `#fafafa` と誤認しているが、写真上にもコントラストが低い箇所は残る。WCAG 適合確認済みとは扱わない。既存の見た目を保持する今回のローカル確認版では必須修正にせず、課題として記録した。
+SHOP LIST の白い見出しは、元サイトと同じく明るいペンダント部分に重なる。背景の一部を採取した白文字とのコントラスト比はデスクトップで約 1.85:1、モバイルで約 1.73:1。検出器は背景を `#fafafa` と誤認しているが、写真上にもコントラストが低い箇所は残る。WCAG 適合確認済みとは扱わない。既存の見た目を保持する今回の移行では必須修正にせず、課題として記録した。
 
 CONTACT の URL は利用者指定。自動取得では HTTP 403 またはキャッシュ未取得となり、遷移先フォームの表示・問い合わせ送信は未検証。別担当の完了レビューでは、ローカル確認版の引き渡しに必要な修正はなかった。
 
-公開準備として、`mirah.jp` の一時フォルダーに公開用の転送設定と `noindex` の確認用 HTML を置き、取得内容の一致で配置先を確認した。Apache 上で `page_id=25`、`page_id=4`、CONTACT の転送とクエリ除去、旧画像 URL の転送、assets 一覧の 403、存在しないパスの 404、確認用ルートの 200 の計 7 件を確認した。一時フォルダーは削除済み。既存の `.htaccess` と `index.php` の SHA-256 は作業前後で一致し、本体の切替は行っていない。
+切替前の公開準備では、`mirah.jp` の一時フォルダーに公開用の転送設定と `noindex` の確認用 HTML を置き、取得内容の一致で配置先を確認した。Apache 上で `page_id=25`、`page_id=4`、CONTACT の転送とクエリ除去、旧画像 URL の転送、assets 一覧の 403、存在しないパスの 404、確認用ルートの 200 の計 7 件を確認した。一時フォルダーは削除済み。この事前確認では既存の `.htaccess` と `index.php` の SHA-256 は作業前後で一致した。
