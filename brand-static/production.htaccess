@@ -1,6 +1,20 @@
 DirectoryIndex index.html
 Options -Indexes
 
+# Advertise the same usage policy for documents and images, including direct image requests.
+<FilesMatch "(?i)\.html$">
+  Header always merge Link '<https://harim.jp/rsl.xml>; rel="license"; type="application/rsl+xml"'
+</FilesMatch>
+Header always merge Link '<https://harim.jp/rsl.xml>; rel="license"; type="application/rsl+xml"' "expr=%{REQUEST_URI} =~ m#\.(?:avif|gif|ico|jpe?g|png|svg|webp)$#i"
+<Files "ai-usage.txt">
+  ForceType text/plain
+  AddDefaultCharset UTF-8
+  Header always merge Link '<https://harim.jp/rsl.xml>; rel="license"; type="application/rsl+xml"'
+</Files>
+<Files "rsl.xml">
+  ForceType application/rsl+xml
+</Files>
+
 RewriteEngine On
 
 RewriteCond %{HTTPS} !=on [OR]

@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderSeoHead, renderBreadcrumbs, renderSitemap } from '../site-tools/seo.mjs';
+import { renderRsl, renderAiUsage } from '../site-tools/rsl.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -36,6 +37,7 @@ function template(page, content) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   ${renderSeoHead(site, page, { production, content })}
+  ${production ? `<link rel="license" type="application/rsl+xml" href="${site.origin}/rsl.xml">` : ''}
   <link rel="icon" href="${base}assets/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="${base}assets/apple-touch-icon.png">
   <link rel="preload" href="${base}assets/crimson-text-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -86,9 +88,12 @@ for (const page of pages) {
   await writeFile(path.join(destination, 'index.html'), template(page, content));
 }
 await writeFile(path.join(output, 'robots.txt'), production
-  ? `User-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`
+  ? `License: ${site.origin}/rsl.xml\n\nUser-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`
   : 'User-agent: *\nDisallow: /\n');
 if (production) {
+  const manifest = JSON.parse(await readFile(path.join(root, 'assets/manifest.json'), 'utf8'));
+  await writeFile(path.join(output, 'rsl.xml'), renderRsl(site, pages, manifest));
+  await writeFile(path.join(output, 'ai-usage.txt'), renderAiUsage(site));
   await cp(path.join(root, 'production.htaccess'), path.join(output, '.htaccess'));
   await writeFile(path.join(output, 'sitemap.xml'), renderSitemap(site, pages));
 }
