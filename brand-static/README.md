@@ -39,7 +39,7 @@ WordPress の出力を丸ごと保存すると、非表示の会員フォーム�
 
 切り替え前の HARIM の公開 HTML に WordPress 5.4.24 と WooCommerce 4.2.5 の generator がありました。SSH 接続後、`www/brand` に置いたランダム名の一時ファイルを `https://harim.jp/` で取得し、ドメインとの対応を確認しました。一時ファイルは確認後に削除しています。
 
-MIRAH の公開 HTML には WordPress 4.9.26 の generator と `/wp-content/themes/mirah/` の参照があります。`https://mirah.jp/wp-json/` は HTTP 200 の JSON を返し、`oembed/1.0`、`akismet/v1`、`wp/v2` の名前空間がありました。`/contact/` に POST フォームもあります。WordPress の構成が確認できる一方、HTML を毎回 PHP で生成しているか、キャッシュを配信しているかは公開応答だけでは確定していません。
+切替前の MIRAH の公開 HTML には WordPress 4.9.26 の generator と `/wp-content/themes/mirah/` の参照がありました。`https://mirah.jp/wp-json/` は HTTP 200 の JSON を返し、`oembed/1.0`、`akismet/v1`、`wp/v2` の名前空間がありました。`/contact/` に POST フォームもありました。その後の静的化と公開記録は [MIRAH の README](../mirah-static/README.md) に記録しています。
 
 ## 検証（2026-10-22 JST）
 
@@ -71,10 +71,22 @@ node build.mjs --production
 - 公開後の Chrome で3ページを390・1440px幅で確認し、画像・フォント・リンク・メニュー・JavaScript 無効時のナビゲーションが動作しました。横はみ出し、JavaScript エラー、外部リソース要求はありませんでした。
 - 切り替え前後で `mirah` と `shop` の `index.php`・`.htaccess` の SHA-256 が一致しました。
 
-旧 brand のファイルはサーバーの `$HOME/.harim-backups/brand-20261022T060026Z-ce344906` に退避しています。親ディレクトリは所有者のみアクセスでき、公開領域の外にあります。DB は変更していません。復旧する場合は静的版を退避し、この旧 brand ディレクトリを `www/brand` へ戻します。
+切替時、旧 brand のファイルをサーバーの `$HOME/.harim-backups/brand-20261022T060026Z-ce344906` に退避しました。公開領域外に置き、親ディレクトリを所有者のみアクセスできる権限にしました。この切替では DB を変更していません。
 
 SFTP 接続を検証し、ローカルの `.vscode/sftp.json` に保存しました。Git 管理外、権限600、既存秘密鍵のファイル参照を使い、アップロード元は `brand-static/dist-production`、転送先は `www/brand` です。保存時の自動アップロードと同期時の削除は無効です。接続値はリポジトリに含めません。
 
-公開後、利用者が `shop` と `staging` は未使用と確認し、削除を依頼しました。`www/shop` は `$HOME/.harim-backups/shop-20261022T060026Z-ce344906` に退避し、公開領域から削除しました。処理後も brand の全配信ファイルと mirah の `index.php`・`.htaccess` の SHA-256 は一致しています。DB は変更していません。
+公開後、利用者が `shop` と `staging` は未使用と確認し、削除を依頼しました。`www/shop` は `$HOME/.harim-backups/shop-20261022T060026Z-ce344906` に退避し、公開領域から削除しました。この処理の前後で brand の全配信ファイルと mirah の `index.php`・`.htaccess` の SHA-256 は一致し、DB は変更していません。
 
 `www/staging` は存在しませんでした。旧 brand・旧 shop・ホーム直下の同名ディレクトリと、公開領域の浅い階層にある類似名も調べましたが、該当ディレクトリは見つかっていません。
+
+## 旧 WordPress と DB の削除（2026-10-22 JST）
+
+利用者から旧 WordPress と DB 内のデータを削除してよいとの指示を受け、16:09 JST に 71 テーブルを削除しました。旧 brand と shop は同一 DB・同一 prefix の 58 テーブルを共有し、MIRAH は別 DB の 13 テーブルを使っていました。両 DB の残存テーブルは 0 件です。DB 自体と DB ユーザーは残しています。
+
+削除前に公開領域の WordPress 設定が 0 件であること、対象 DB に他用途のテーブル・VIEW・routine・event がないことを確認しました。DB の行データは取得せず、接続設定とテーブルの一覧をサーバー内部で照合しました。新しい DB ダンプは作成していません。
+
+16:21 JST に旧 brand・shop・mirah の退避ディレクトリ 3 件の削除が完了しました。対象は合計 32,258 ファイル・1,103,283,249 bytes でした。旧 WordPress の退避ファイルと DB 内のデータは削除済みで、この退避先からは復旧できません。
+
+削除後、公開中の HARIM 20 ファイルと MIRAH 22 ファイルの SHA-256 が生成物と一致しました。DB 削除後の両サイトの公開 URL 検査 56 件も通過しています。検証記録は Git 管理外の `mirah-static/.impeccable/cleanup/` に保存しています。
+
+初回の読み取り調査は 180 秒でタイムアウトしました。削除処理を行う前に調査を再実行し、DB とテーブルの対応を確認しました。

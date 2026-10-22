@@ -65,11 +65,13 @@ node build.mjs --production
 
 2026-10-22 15:50 JST、`dist-production/` の 22 ファイルを `www/mirah` に配置した。転送後の SHA-256 を照合してから、同じファイルシステム内のディレクトリ移動で切り替えた。
 
-旧 WordPress は `$HOME/.harim-backups/mirah-20261022T064949Z-6135cf3c` に退避した。公開領域外で、親ディレクトリの権限は `700`。旧 `index.php` と `.htaccess` の SHA-256 は切替前と一致する。DB の変更・削除は行っていない。復旧時は静的版を公開領域外へ移してから、この退避ディレクトリを `www/mirah` に戻す。
+切替時、旧 WordPress を `$HOME/.harim-backups/mirah-20261022T064949Z-6135cf3c` に退避した。公開領域外に置き、親ディレクトリの権限を `700` にした。旧 `index.php` と `.htaccess` の SHA-256 は切替前と一致した。この切替では DB の変更・削除を行っていない。
 
 公開後の確認では、ページ・素材の内容一致、CONTACT と旧画像 URL の転送、HTTP から HTTPS への転送、旧 WordPress パスの 404、assets 一覧の 403 など、HTTP 検査 54 件が通過した。HARIM の公開ファイル 20 件は切替前後で一致した。
 
 Chrome の幅 1440 / 390px で本番 2 ページの画像・フォント・内部リンク・メニュー操作を確認し、横方向のはみ出し、JavaScript エラー、表示時の外部リソース要求は検出されなかった。JavaScript 無効時も画像とリンクを確認した。本番の検証記録と画面は Git 管理外の `.impeccable/production/` に保存している。
+
+2026-10-22 16:09 JST、利用者の削除指示を受けて MIRAH の旧 DB の 13 テーブルを削除し、残存テーブル 0 件を確認した。DB 自体と DB ユーザーは残している。16:21 JST に上記の退避ディレクトリも削除したため、旧 WordPress の復旧用データはこの退避先に残っていない。削除後も公開中の 22 ファイルの SHA-256 は生成物と一致した。HARIM・旧 shop を含む削除の記録は [HARIM の README](../brand-static/README.md#旧-wordpress-と-db-の削除2026-10-22-jst) に記録している。
 
 ## 検証記録
 
