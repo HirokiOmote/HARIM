@@ -90,3 +90,9 @@ SFTP 接続を検証し、ローカルの `.vscode/sftp.json` に保存しまし
 削除後、公開中の HARIM 20 ファイルと MIRAH 22 ファイルの SHA-256 が生成物と一致しました。DB 削除後の両サイトの公開 URL 検査 56 件も通過しています。検証記録は Git 管理外の `mirah-static/.impeccable/cleanup/` に保存しています。
 
 初回の読み取り調査は 180 秒でタイムアウトしました。削除処理を行う前に調査を再実行し、DB とテーブルの対応を確認しました。
+
+## SEO の更新（2026-10-22 JST）
+
+タイトル・description・OGP・Twitter Card・JSON-LD と画像サイトマップを追加した。下層ページにはパンくずを表示し、公開時の内部リンクと `index.html` の転送先を canonical URL に揃えた。本文・メタ情報の日本語は「アクセサリー」に修正した。
+
+共通実装と検査記録は [静的サイトの SEO](../site-tools/README.md) を参照。

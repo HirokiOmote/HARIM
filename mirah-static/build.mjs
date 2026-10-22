@@ -1,6 +1,7 @@
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { renderSeoHead, renderBreadcrumbs, renderSitemap } from '../site-tools/seo.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -11,31 +12,29 @@ if (args.some(argument => argument !== '--production')) {
 const production = args.includes('--production');
 const outputDirectory = production ? 'dist-production' : 'dist';
 const output = path.join(root, outputDirectory);
-const site = 'https://mirah.jp';
+const site = {
+  origin: 'https://mirah.jp', name: 'MIRAH',
+  description: 'アクセサリーブランド、MIRAHの公式サイト。アクセサリーの写真と、全国の取扱店舗を紹介しています。オンラインショップとお問い合わせ窓口もこちらから。',
+  logo: 'assets/logo-black.svg', sameAs: ['https://www.instagram.com/mirah_silver_official/'],
+  image: { path: 'assets/hero.jpg', width: 1750, height: 875, type: 'image/jpeg', alt: 'MIRAHのネックレスと花' }
+};
 const inquiry = 'https://mirah-store.com/inquiry';
 const pages = [
-  { name: 'home', route: '', title: 'MIRAH', description: 'MIRAHのジュエリーとお取り扱い店舗。' },
-  { name: 'shoplist', route: 'shoplist/', title: 'SHOP LIST | MIRAH', description: 'MIRAHのお取り扱い店舗。' }
+  { name: 'home', route: '', title: 'MIRAH公式サイト | アクセサリーブランド', description: site.description, schemaType: 'WebPage', images: ['assets/hero.jpg', 'assets/top-01@2x.jpg', 'assets/top-02@2x.jpg', 'assets/top-03@2x.jpg', 'assets/top-04@2x.jpg'] },
+  { name: 'shoplist', route: 'shoplist/', title: '取扱店舗 | MIRAH', breadcrumb: 'SHOP LIST', description: 'MIRAHのアクセサリーを取り扱う全国の店舗一覧。地域ごとの店舗名、所在地、各店舗のWebサイトを掲載しています。', schemaType: 'CollectionPage', images: ['assets/hero.jpg'] }
 ];
 
 function template(page, content) {
   const base = page.route ? '../' : './';
   const home = page.name === 'home';
+  const homeHref = production ? '/' : `${base}index.html`;
+  const shoplistHref = production ? '/shoplist/' : `${base}shoplist/index.html`;
   return `<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${page.title}</title>
-  <meta name="description" content="${page.description}">
-  ${production ? '' : '<meta name="robots" content="noindex, nofollow">'}
-  <link rel="canonical" href="${site}/${page.route}">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="MIRAH">
-  <meta property="og:title" content="${page.title}">
-  <meta property="og:description" content="${page.description}">
-  <meta property="og:url" content="${site}/${page.route}">
-  <meta property="og:image" content="${site}/assets/hero.jpg">
+  ${renderSeoHead(site, page, { production, content })}
   <link rel="icon" href="${base}assets/logo-black.svg" type="image/svg+xml">
   <link rel="preload" href="${base}assets/karla-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${base}site.css">
@@ -50,25 +49,26 @@ function template(page, content) {
   <div class="layout">
     <aside class="sidebar">
       <nav class="navigation" aria-label="メインメニュー">
-        <a class="brand" href="${base}index.html" aria-label="MIRAH ホーム"><img src="${base}assets/logo-black.svg" alt="MIRAH" width="124" height="46"></a>
+        <a class="brand" href="${homeHref}" aria-label="MIRAH ホーム"><img src="${base}assets/logo-black.svg" alt="MIRAH" width="124" height="46"></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" hidden>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M2 5h20M2 12h20M2 19h20"/></svg>
           <span class="visually-hidden">メニュー</span>
         </button>
         <ul class="menu" id="site-menu">
           <li><a href="https://mirah-store.com/" target="_blank" rel="noopener">ONLINE SHOP</a></li>
-          <li><a href="${base}shoplist/index.html"${home ? '' : ' aria-current="page"'}>SHOP LIST</a></li>
+          <li><a href="${shoplistHref}"${home ? '' : ' aria-current="page"'}>SHOP LIST</a></li>
           <li><a href="https://www.instagram.com/mirah_silver_official/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="${inquiry}">CONTACT</a></li>
         </ul>
       </nav>
     </aside>
-    <main class="content" id="main" tabindex="-1"${home ? ' aria-label="MIRAHのジュエリー"' : ''}>
+    <main class="content" id="main" tabindex="-1"${home ? ' aria-label="MIRAHのアクセサリー"' : ''}>
+${renderBreadcrumbs(site, page, homeHref)}
 ${content}
     </main>
   </div>
   <footer class="site-footer">
-    <a href="${base}index.html" aria-label="MIRAH ホーム"><img src="${base}assets/logo-black.svg" alt="MIRAH" width="70" height="26"></a>
+    <a href="${homeHref}" aria-label="MIRAH ホーム"><img src="${base}assets/logo-black.svg" alt="MIRAH" width="70" height="26"></a>
     <p><small>(C) 2018 MIRAH</small></p>
   </footer>
 </body>
@@ -87,16 +87,15 @@ for (const page of pages) {
   await writeFile(path.join(destination, 'index.html'), template(page, content));
 }
 await writeFile(path.join(output, 'robots.txt'), production
-  ? `User-agent: *\nAllow: /\n\nSitemap: ${site}/sitemap.xml\n`
+  ? `User-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`
   : 'User-agent: *\nDisallow: /\n');
 if (production) {
-  const urls = pages.map(page => `  <url><loc>${site}/${page.route}</loc></url>`).join('\n');
-  await writeFile(path.join(output, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
+  await writeFile(path.join(output, 'sitemap.xml'), renderSitemap(site, pages));
   let routing = await readFile(path.join(root, 'production.htaccess'), 'utf8');
   const manifest = JSON.parse(await readFile(path.join(root, 'assets/manifest.json'), 'utf8'));
   for (const asset of manifest.assets) {
     const source = new URL(asset.source_url);
-    if (source.origin !== site) continue;
+    if (source.origin !== site.origin) continue;
     const pattern = source.pathname.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     routing += `RewriteRule ^${pattern}$ /assets/${asset.file} [R=301,L,QSD]\n`;
   }
