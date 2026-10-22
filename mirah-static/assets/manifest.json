@@ -1,0 +1,120 @@
+{
+  "source": "https://mirah.jp/",
+  "pages": [
+    "https://mirah.jp/",
+    "https://mirah.jp/shoplist/",
+    "https://mirah.jp/contact/"
+  ],
+  "stylesheets": [
+    "https://mirah.jp/wp-content/themes/mirah/css/all.css?ver=4.9.26",
+    "https://mirah.jp/wp-content/themes/mirah/style.css?ver=4.9.26"
+  ],
+  "retrieved_at": "2026-10-22T06:13:56.788861+00:00",
+  "assets": [
+    {
+      "file": "logo.svg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/common/logo.svg",
+      "sha256": "4141891ca22ac57aa3a92efba4fa802c5e1c84f373e00c2522cf15f55c150766",
+      "size": 238406,
+      "mime_type": "image/svg+xml"
+    },
+    {
+      "file": "logo-black.svg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/common/logo_black.svg",
+      "sha256": "6b2d16ec38fb689454abb5fbb21a90a03474ec24a82de1387128d8f7a73f17d6",
+      "size": 238406,
+      "mime_type": "image/svg+xml"
+    },
+    {
+      "file": "hero.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/bg_header.jpg",
+      "sha256": "85f1b0ef18e368f575986cf299b3b3831abba42d00a9bee8f0627645a012d511",
+      "size": 758166,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "hero@2x.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/bg_header@2x.jpg",
+      "sha256": "cf6b35fa9e003df7bc35109062811ed64a00373504fb21148a105f52f9105f6e",
+      "size": 1460646,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-01.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top001.jpg",
+      "sha256": "366b02309ffae6cd76700e5ad55fb785a780d0972cd9d82a50943430e5f7142b",
+      "size": 84937,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-01@2x.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top001@2x.jpg",
+      "sha256": "440d63a10f4779664156cb9fe9cab7b04e8167f3b8fdcf9fdb5d367ac3973725",
+      "size": 316045,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-02.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top002.jpg",
+      "sha256": "47ea6bd51b0babc15483c4dc285e7f056e8c3bcd67b20eedcc9200d878cfb1ff",
+      "size": 50626,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-02@2x.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top002@2x.jpg",
+      "sha256": "d04c030ff2e0bfe625014d497607b7e9b21a3124e99e57f22d3b19d77374b28a",
+      "size": 248766,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-03.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top003.jpg",
+      "sha256": "5797dce8a68230126e83536a32db826d118400dcac7536fa98ae45e104d59df3",
+      "size": 38016,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-03@2x.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top003@2x.jpg",
+      "sha256": "b311644d50ab6a47a49a8052016f12c731cfc460bdfee2408c74338e1cb4280b",
+      "size": 182462,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-04.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top004.jpg",
+      "sha256": "f7b9bac5d22f1665ab3f0a52f0964dae1e24c0f8d886809dec61408072de711c",
+      "size": 139688,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "top-04@2x.jpg",
+      "source_url": "https://mirah.jp/wp-content/themes/mirah/images/top/img_top004@2x.jpg",
+      "sha256": "072b9f25b12d53d72245f4098eb5e511a3e8a93f0da379b8bcb799afd5361ae1",
+      "size": 686573,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "karla-latin.woff2",
+      "source_url": "https://fonts.gstatic.com/s/karla/v33/qkBIXvYC6trAT55ZBi1ueQVIjQTD-JqaE0lKZbLXGhmR.woff2",
+      "sha256": "ff95840b57b1d71b23b3954a117a7c42f2e7dc38d2675a0c273247d7c715f612",
+      "size": 13144,
+      "mime_type": "font/woff2",
+      "family": "Karla",
+      "style": "normal",
+      "weight": 400,
+      "subset": "latin",
+      "stylesheet_url": "https://fonts.googleapis.com/css?family=Karla",
+      "license_file": "fonts-OFL.txt"
+    },
+    {
+      "file": "fonts-OFL.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/karla/OFL.txt",
+      "sha256": "edf2c840acb9570fe02f40721126aa0da4e4011a0030cc6dce30780569f609b6",
+      "size": 4384,
+      "mime_type": "text/plain",
+      "license": "SIL Open Font License 1.1"
+    }
+  ]
+}
