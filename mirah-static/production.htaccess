@@ -1,0 +1,16 @@
+DirectoryIndex index.html
+Options -Indexes
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^mirah\.jp$ [NC]
+RewriteRule ^ https://mirah.jp%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{QUERY_STRING} (^|&)page_id=25(&|$)
+RewriteRule ^(?:index\.php)?$ /shoplist/ [R=301,L,QSD]
+RewriteCond %{QUERY_STRING} (^|&)page_id=4(&|$)
+RewriteRule ^(?:index\.php)?$ https://mirah-store.com/inquiry [R=301,L,QSD]
+RewriteRule ^contact(?:/index\.html)?/?$ https://mirah-store.com/inquiry [R=301,L,QSD]
+RewriteRule ^index\.php$ / [R=301,L,QSD]
+
+# The build appends redirects for the original public image URLs.
