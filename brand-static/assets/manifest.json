@@ -1,0 +1,92 @@
+{
+  "source": "https://harim.jp/",
+  "retrieved_at": "2026-10-22T05:04:15.561949+00:00",
+  "assets": [
+    {
+      "file": "logo.svg",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/10/logo.svg",
+      "sha256": "ba33aa9b686168c9b30f4494ec6fb950c58dc8a9f2d22a1102ae5a9382860bc0",
+      "size": 25287,
+      "mime_type": "image/svg+xml"
+    },
+    {
+      "file": "logo-full.svg",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/10/logo_full.svg",
+      "sha256": "fe8ba605f02ea393bf6b6af0c203e40fc248eb297c5288a79dcd732891281311",
+      "size": 232850,
+      "mime_type": "image/svg+xml"
+    },
+    {
+      "file": "owl-feather.png",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/10/owl_feather.png",
+      "sha256": "ed13610c13897d9539d1991ba2acd788b0352fd050284c5efd2df11080f03dfc",
+      "size": 780135,
+      "mime_type": "image/png"
+    },
+    {
+      "file": "necklaces.jpg",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/10/c91aede2ae5cfbb156b96ad010980d9e.jpg",
+      "sha256": "e1e28a30383ce1381b50c11fa368d25796adc379526f975560f92c9046fac595",
+      "size": 107861,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "rings.jpg",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/10/e8c1b80bed91b587fb6b84495c509817.jpg",
+      "sha256": "42f301ef8f70fa933b965624a94bdce2e2acc29b8fc83ec8580ff669d464a064",
+      "size": 399784,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "bracelets.jpg",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/10/8e9b6ac6d9566dab874951168fb749ef.jpg",
+      "sha256": "1e2f573882c206597ab39d49a17a07ddf461baedae08387797aaa668034975b8",
+      "size": 139558,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "file": "instagram.svg",
+      "source_url": "https://harim.jp/wp-content/uploads/2018/11/logo_instagram.svg",
+      "sha256": "0224f5325f283a3d07588a68e10f9e61113b09eb9f26ecb4906b4be225a48a75",
+      "size": 20952,
+      "mime_type": "image/svg+xml"
+    },
+    {
+      "file": "favicon.png",
+      "source_url": "https://harim.jp/wp-content/uploads/2020/10/cropped-HARIM-2-32x32.png",
+      "sha256": "9786f53de309441e1630c615564075a60eb4bf7e23938dcbcbe7deec1f220014",
+      "size": 1383,
+      "mime_type": "image/png"
+    },
+    {
+      "file": "apple-touch-icon.png",
+      "source_url": "https://harim.jp/wp-content/uploads/2020/10/cropped-HARIM-2-180x180.png",
+      "sha256": "2e6e6287b1c54d7c1cb75e9fcd369e570fc4abedbee19f31c0d2168204c45c98",
+      "size": 26433,
+      "mime_type": "image/png"
+    },
+    {
+      "file": "crimson-text-latin.woff2",
+      "source_url": "https://fonts.gstatic.com/s/crimsontext/v19/wlp2gwHKFkZgtmSR3NB0oRJfbwhTIfFd3A.woff2",
+      "sha256": "aac0df38a2b744060a432018c9b8179ac33a09f381f4d7e804a9b638f173af29",
+      "size": 16732,
+      "mime_type": "font/woff2",
+      "retrieved_at": "2026-10-22T05:05:58.212785+00:00",
+      "family": "Crimson Text",
+      "style": "normal",
+      "weight": 400,
+      "subset": "latin",
+      "stylesheet_url": "https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap",
+      "license_file": "fonts-OFL.txt"
+    },
+    {
+      "file": "fonts-OFL.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/crimsontext/OFL.txt",
+      "sha256": "50fd67cddc097377a5c871e8452b778bc5aedfa3480a705cb27c5e3a078218df",
+      "size": 4393,
+      "mime_type": "text/plain",
+      "retrieved_at": "2026-10-22T05:05:58.212785+00:00",
+      "license": "SIL Open Font License 1.1"
+    }
+  ]
+}
