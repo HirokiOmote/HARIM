@@ -3,7 +3,14 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const output = path.join(root, 'dist');
+const args = process.argv.slice(2);
+if (args.some(argument => argument !== '--production')) {
+  console.error('Usage: node build.mjs [--production]');
+  process.exit(1);
+}
+const production = args.includes('--production');
+const outputDirectory = production ? 'dist-production' : 'dist';
+const output = path.join(root, outputDirectory);
 const site = 'https://harim.jp';
 const shop = 'https://harimshop.net/';
 const pages = [
@@ -22,7 +29,7 @@ function template(page, content) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${page.title}</title>
   <meta name="description" content="${page.description}">
-  <meta name="robots" content="noindex, nofollow">
+  ${production ? '' : '<meta name="robots" content="noindex, nofollow">'}
   <link rel="canonical" href="${site}/${page.route}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="HARIM">
@@ -66,7 +73,7 @@ function template(page, content) {
 `;
 }
 
-// Only generated files under this project's dist directory are replaced.
+// Replace only the selected build's generated directory.
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(path.join(root, 'assets'), path.join(output, 'assets'), { recursive: true });
@@ -77,5 +84,12 @@ for (const page of pages) {
   await mkdir(destination, { recursive: true });
   await writeFile(path.join(destination, 'index.html'), template(page, content));
 }
-await writeFile(path.join(output, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
-console.log(`Built ${pages.length} preview pages in brand-static/dist. Search indexing is disabled.`);
+await writeFile(path.join(output, 'robots.txt'), production
+  ? `User-agent: *\nAllow: /\n\nSitemap: ${site}/sitemap.xml\n`
+  : 'User-agent: *\nDisallow: /\n');
+if (production) {
+  await cp(path.join(root, 'production.htaccess'), path.join(output, '.htaccess'));
+  const urls = pages.map(page => `  <url><loc>${site}/${page.route}</loc></url>`).join('\n');
+  await writeFile(path.join(output, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
+}
+console.log(`Built ${pages.length} ${production ? 'production' : 'preview'} pages in brand-static/${outputDirectory}. Search indexing is ${production ? 'enabled' : 'disabled'}.`);

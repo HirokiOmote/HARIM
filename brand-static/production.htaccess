@@ -1,0 +1,34 @@
+DirectoryIndex index.html
+Options -Indexes
+
+RewriteEngine On
+
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^harim\.jp$ [NC]
+RewriteRule ^ https://harim.jp%{REQUEST_URI} [R=301,L]
+
+# Preserve the published WordPress page IDs without forwarding query parameters.
+RewriteCond %{QUERY_STRING} (^|&)page_id=1282(&|$)
+RewriteRule ^(?:index\.php)?$ /about/ [R=301,L,QSD]
+RewriteCond %{QUERY_STRING} (^|&)page_id=1291(&|$)
+RewriteRule ^(?:index\.php)?$ /stocklist/ [R=301,L,QSD]
+RewriteCond %{QUERY_STRING} (^|&)page_id=726(&|$)
+RewriteRule ^(?:index\.php)?$ https://harimshop.net/privacy_policy [R=301,L,QSD]
+RewriteCond %{QUERY_STRING} (^|&)page_id=188(&|$)
+RewriteRule ^(?:index\.php)?$ / [R=301,L,QSD]
+
+# The old policy and account pages belong to the shop.
+RewriteRule ^privacy-policy(?:/index\.html)?/?$ https://harimshop.net/privacy_policy [R=301,L,QSD]
+RewriteRule ^(?:my-account|cart|checkout)(?:/.*)?$ https://harimshop.net/ [R=301,L,QSD]
+RewriteRule ^(?:index\.php|home/?)$ / [R=301,L,QSD]
+
+# Keep existing public image URLs working after removing WordPress.
+RewriteRule ^wp-content/uploads/2018/10/logo\.svg$ /assets/logo.svg [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2018/10/logo_full\.svg$ /assets/logo-full.svg [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2018/10/owl_feather\.png$ /assets/owl-feather.png [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2018/10/c91aede2ae5cfbb156b96ad010980d9e\.jpg$ /assets/necklaces.jpg [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2018/10/e8c1b80bed91b587fb6b84495c509817\.jpg$ /assets/rings.jpg [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2018/10/8e9b6ac6d9566dab874951168fb749ef\.jpg$ /assets/bracelets.jpg [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2018/11/logo_instagram\.svg$ /assets/instagram.svg [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2020/10/cropped-HARIM-2-32x32\.png$ /assets/favicon.png [R=301,L,QSD]
+RewriteRule ^wp-content/uploads/2020/10/cropped-HARIM-2-180x180\.png$ /assets/apple-touch-icon.png [R=301,L,QSD]
